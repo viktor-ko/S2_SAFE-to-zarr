@@ -2,23 +2,24 @@ import re
 import os
 from google.cloud import storage
 
-#Extracts the sensing time from Sentinel-2 filename
+
 def extract_sensing_time(filename):
     match = re.search(r'_(\d{8}T\d{6})_', filename)  #Match YYYYMMDDTHHMMSS between underscores
     if match:
         timestamp = match.group(1)
         return f"{timestamp[:4]}-{timestamp[4:6]}-{timestamp[6:8]} {timestamp[9:11]}:{timestamp[11:13]}:{timestamp[13:]}"
-    return None  #If no timestamp found
+    return None
+
 
 def create_gcs_bucket(bucket_name):
-    storage_client = storage.Client() #Create a client
+    storage_client = storage.Client()
     bucket = storage_client.bucket(bucket_name) #Create a bucket object with the desired name
     new_bucket = storage_client.create_bucket(bucket, location="EU") #Create the bucket located on servers in the EU region
     print(f"Bucket {new_bucket.name} created in {new_bucket.location}.")
     return new_bucket
 
-#Upload folder to GCS bucket
-def gcs_upload_folder(bucket_name, source, destination_blob):
+
+def upload_folder_to_gcs(bucket_name, source, destination_blob):
     storage_client = storage.Client()
     bucket = storage_client.bucket(bucket_name)
     bucket.storage_class = "STANDARD"  #Free tier
