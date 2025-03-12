@@ -1,0 +1,26 @@
+{
+    "_ARRAY_DIMENSIONS": [
+        "band",
+        "y",
+        "x"
+    ],
+    "add_offset": 0.0,
+    "grid_mapping": "spatial_ref",
+    "resolution": [
+        10.0,
+        -10.0
+    ],
+    "scale_factor": 1.0,
+    "sensing_time": "2025-03-06 10:19:31",
+    "transform": [
+        10.0,
+        0.0,
+        600000.0,
+        0.0,
+        -10.0,
+        5400000.0,
+        0.0,
+        0.0,
+        1.0
+    ]
+}
